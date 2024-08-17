@@ -205,27 +205,35 @@ def downgrade() -> None:
     op.drop_table('wishlist_movie')
     op.drop_index('ix_tickets_id', table_name='tickets')
     op.drop_table('tickets')
+    
     op.drop_index('ix_seats_id', table_name='seats')
     op.drop_index('ix_seats_seat_number', table_name='seats')
     op.drop_table('seats')
+    
     op.drop_index('ix_showtimes_id', table_name='showtimes')
     op.drop_table('showtimes')
-    # op.drop_table('movies')
+    
+    op.drop_table('movies')
     op.drop_index('ix_theaters_id', table_name='theaters')
     op.drop_index('ix_theaters_name', table_name='theaters')
     op.drop_table('theaters')
+    
     op.drop_index('ix_locations_id', table_name='locations')
     op.drop_index('ix_locations_country', table_name='locations')
     op.drop_index('ix_locations_city', table_name='locations')
     op.drop_table('locations')
+    
     op.drop_index('ix_wishlists_id', table_name='wishlists')
     op.drop_table('wishlists')
+    
     op.drop_index('ix_users_email', table_name='users')
-    # op.drop_index('ix_users_id', table_name='users')
+    op.drop_index('ix_users_id', table_name='users')
     op.drop_index('ix_users_name', table_name='users')
     op.drop_table('users')
+    
     op.drop_index('ix_categories_id', table_name='categories')
     op.drop_index('ix_categories_name', table_name='categories')
+    
     op.drop_table('categories')
     op.drop_table('movie_categories')
     # ### end Alembic commands ###
