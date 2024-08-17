@@ -26,7 +26,7 @@ def upgrade() -> None:
     if 'movie_ids' not in columns:
         op.add_column('wishlists', sa.Column('movie_ids', sa.JSON(), nullable=True))
         
-    op.drop_constraint('wishlists_ibfk_2', 'wishlists', type_='foreignkey')
+    op.drop_constraint('wishlists_ibfk_1', 'wishlists', type_='foreignkey')
     
     if 'movie_id' in columns:
         op.drop_column('wishlists', 'movie_id')
