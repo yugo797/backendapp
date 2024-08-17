@@ -23,6 +23,17 @@ def upgrade() -> None:
     conn = op.get_bind()
     inspector = Inspector.from_engine(conn)
     
+    constraint_name = 'wishlists_ibfk_2'
+    constraint_exists = op.execute(
+        "SELECT CONSTRAINT_NAME "
+        "FROM information_schema.KEY_COLUMN_USAGE "
+        "WHERE TABLE_NAME = 'wishlists' AND CONSTRAINT_NAME = %s", 
+        (constraint_name,)
+    ).fetchone()
+
+    if constraint_exists:
+        op.drop_constraint(constraint_name, 'wishlists', type_='foreignkey')
+    
     if('categories' not in inspector.get_table_names()):
         op.create_table('categories',
             sa.Column('id', sa.Integer(), primary_key=True, autoincrement=True, nullable=False),
