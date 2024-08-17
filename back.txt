@@ -1,0 +1,7 @@
+1.
+    .\env\Scripts\activate (za pokretanje virutelnog okruzenja)
+2.
+    sve potrebne instalacije se nalaze u backend\requirements.txt
+    pip install -r requirements.txt
+3.
+    uvicorn main:app --reload (za pokretanje sajta)
