@@ -32,6 +32,20 @@ def upgrade() -> None:
             mysql_engine='InnoDB'
         )
        
+    if 'movies' not in inspector.get_table_names():
+        op.create_table('movies',
+            sa.Column('id', sa.Integer(), primary_key=True, autoincrement=True, nullable=False),
+            sa.Column('title', sa.String(50), nullable=True),
+            sa.Column('description', sa.String(1000), nullable=True),
+            sa.Column('duration', sa.Integer(), nullable=True),
+            sa.Column('release_date', sa.Date(), nullable=True),
+            sa.Column('rating', sa.Float(), nullable=True),
+            sa.Column('image', sa.String(500), nullable=True),
+            sa.Column('video', sa.String(500), nullable=True),
+            mysql_collate='utf8mb4_0900_ai_ci',
+            mysql_default_charset='utf8mb4',
+            mysql_engine='InnoDB'
+        )
     if('movie_categories' not in inspector.get_table_names()):
         op.create_table('movie_categories',
             sa.Column('movie_id', sa.Integer(), nullable=False),
@@ -116,20 +130,6 @@ def upgrade() -> None:
     if 'ix_theaters_id' not in existing_indexes:
         op.create_index('ix_theaters_id', 'theaters', ['id'], unique=False)
     
-    if 'movies' not in inspector.get_table_names():
-        op.create_table('movies',
-            sa.Column('id', sa.Integer(), primary_key=True, autoincrement=True, nullable=False),
-            sa.Column('title', sa.String(50), nullable=True),
-            sa.Column('description', sa.String(1000), nullable=True),
-            sa.Column('duration', sa.Integer(), nullable=True),
-            sa.Column('release_date', sa.Date(), nullable=True),
-            sa.Column('rating', sa.Float(), nullable=True),
-            sa.Column('image', sa.String(500), nullable=True),
-            sa.Column('video', sa.String(500), nullable=True),
-            mysql_collate='utf8mb4_0900_ai_ci',
-            mysql_default_charset='utf8mb4',
-            mysql_engine='InnoDB'
-        )
     
     if 'showtimes' not in inspector.get_table_names():
         op.create_table('showtimes',
